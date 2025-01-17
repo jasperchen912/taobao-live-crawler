@@ -6,7 +6,8 @@ process.on('message', async message => {
     const browser = await puppeteer.launch()
     const page = (await browser.pages())[0]
     await page.setRequestInterception(true)
-    const api = 'http://h5api.m.taobao.com/h5/mtop.mediaplatform.live.encryption/1.0/'
+    //const api = 'http://h5api.m.taobao.com/h5/mtop.mediaplatform.live.encryption/1.0/'
+    const api = 'https://h5api.m.taobao.com/h5/mtop.taobao.dreamweb.anchor.h5token/1.0'
     const { url } = message
 
     // intercept request obtaining the web socket token
@@ -24,7 +25,8 @@ process.on('message', async message => {
 
         // establish web socket connection (won't be ready immediately)
         setTimeout(() => {
-            const url = `ws://acs.m.taobao.com/accs/auth?token=${token}`
+            //const url = `ws://acs.m.taobao.com/accs/auth?token=${token}`
+            const url = `wss://ws-msgacs.m.taobao.com/accs/auth?token=${token}`
             const ws = new WebSocket(url)
 
             ws.on('open', () => {
